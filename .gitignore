@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Terraform (pentru mai târziu)
+.terraform/
+*.tfstate*
