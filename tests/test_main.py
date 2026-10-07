@@ -24,3 +24,14 @@ def test_add_and_list_tasks(client):
 def test_add_task_without_title(client):
     resp = client.post("/tasks", json={})
     assert resp.status_code == 400
+
+def test_delete_task(client):
+    client.post("/tasks", json={"title":"de sters"})
+    resp = client.delete("/tasks/1")
+    assert resp.status_code == 204
+    assert client.get("/tasks").get_json() == []
+
+def test_delete_missing_task(client):
+    resp = client.delete("/tasks/999")
+    assert resp.status_code == 404
+

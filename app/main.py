@@ -16,6 +16,13 @@ def health():
 def list_tasks():
     return jsonify(TASKS)
 
+@app.delete("/tasks/<int:task_id>")
+def delete_task(task_id):
+    for task in TASKS:
+        if task["id"] == task_id:
+            TASKS.remove(task)
+            return "", 204
+    return jsonify(error="task inexistent"), 404
 
 @app.post("/tasks")
 def add_task():
